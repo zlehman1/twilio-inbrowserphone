@@ -1,0 +1,49 @@
+// record from calling
+@app.route('/handle_calls', methods=['POST'])
+def call():
+    p.pprint(request.form)
+    response = VoiceResponse()
+    dial = Dial(
+        callerId=twilio_number,
+        record='record-from-answer',
+        recording_status_callback='/recording_callback'
+    )
+
+    if 'To' in request.form and request.form['To'] != twilio_number:
+        print('outbound call')
+        dial.number(request.form['To'])
+    else:
+        print('incoming call')
+        caller = request.form['Caller']
+        dial = Dial(callerId=caller)
+        dial.client(twilio_number)
+
+    return str(response.append(dial))
+
+// add recording callback
+@app.route('/recording_callback', methods=['POST'])
+def record():
+    # Get the parameters from the request
+    account_sid = request.form['AccountSid']
+    call_sid = request.form['CallSid']
+    recording_sid = request.form['RecordingSid']
+    recording_url = request.form['RecordingUrl']
+    recording_status = request.form['RecordingStatus']
+    recording_duration = request.form['RecordingDuration']
+    recording_channels = request.form['RecordingChannels']
+    recording_start_time = request.form['RecordingStartTime']
+    recording_source = request.form['RecordingSource']
+
+    # Render an HTML template and pass the parameters as context variables
+    return render_template(
+        'home.html',
+        account_sid=account_sid,
+        call_sid=call_sid,
+        recording_sid=recording_sid,
+        recording_url=recording_url,
+        recording_status=recording_status,
+        recording_duration=recording_duration,
+        recording_channels=recording_channels,
+        recording_start_time=recording_start_time,
+        recording_source=recording_source
+    )
