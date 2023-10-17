@@ -1,0 +1,10 @@
+<h1>Recording Callback Information</h1>
+        <p>AccountSid: {{ account_sid }}</p>
+        <p>CallSid: {{ call_sid }}</p>
+        <p>RecordingSid: {{ recording_sid }}</p>
+        <p>RecordingUrl: {{ recording_url }}</p>
+        <p>RecordingStatus: {{ recording_status }}</p>
+        <p>RecordingDuration: {{ recording_duration }}</p>
+        <p>RecordingChannels: {{ recording_channels }}</p>
+        <p>RecordingStartTime: {{ recording_start_time }}</p>
+        <p>RecordingSource: {{ recording_source }}</p>
