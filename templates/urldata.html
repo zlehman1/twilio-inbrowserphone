@@ -1,5 +1,28 @@
-{% for urllist in urllists %}
-<span><strong>URL: </strong>{{urllist.recording_url}}</span>
-<br />
-{% endfor %}
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Recorded URLs</title>
+     <!-- Include Bootstrap CSS via CDN -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ </head>
+ <body>
+     <div class="container">
+         <h1 class="mt-4 mb-4">Recorded URLs</h1>
+         <div class="list-group">
+             {% for urllist in urllists %}
+             <a href="{{ urllist.recording_url }}" target="_blank" class="list-group-item list-group-item-action">
+                 <h4 class="mb-3">Recording ID: {{ urllist.id }} | Customer Number: <strong>{{ urllist.to_number }}</strong></h4>
+                 <p class="mb-1"><strong>URL: </strong>{{ urllist.recording_url }}</p>
+                 <p class="mb-1"><strong>Duration: </strong>{{ urllist.recording_duration }}</p>
+             </a>
+             {% endfor %}
+         </div>
+     </div>
+ 
+     <!-- Include Bootstrap JS and jQuery via CDNs if needed -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ </body>
+ </html>
 
