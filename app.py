@@ -15,8 +15,8 @@ import pprint as p
 load_dotenv()
 
 account_sid = os.getenv('TWILIO_ACCOUNT_SID')
-api_key = os.getenv('TWILIO_API_KEY')
-api_key_secret = os.getenv('TWILIO_API_SECRET')
+api_key = os.getenv('TWILIO_AUTH_TOKEN')
+api_key_secret = os.getenv('TWILIO_AUTH_TOKEN')
 twiml_app_sid = os.getenv('TWILIO_APP_SID')
 twilio_number = os.getenv('TWILIO_NUMBER')
 
@@ -147,4 +147,4 @@ def retrieve_url_data():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3000, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=False)
