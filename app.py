@@ -61,22 +61,26 @@ def home():
 # Get the access token to actually use the phone feature
 @app.route('/token', methods=['GET'])
 def get_token():
-    identity = twilio_number
-    outgoing_application_sid = twiml_app_sid
+    try:
+        identity = twilio_number
+        outgoing_application_sid = twiml_app_sid
 
-    access_token = AccessToken(account_sid, api_key,
-                               api_key_secret, identity=identity)
+        access_token = AccessToken(account_sid, os.getenv('TWILIO_API_KEY'),
+                                   os.getenv('TWILIO_API_SECRET'), identity=identity)
 
-    voice_grant = VoiceGrant(
-        outgoing_application_sid=outgoing_application_sid,
-        incoming_allow=True,
-    )
-    access_token.add_grant(voice_grant)
+        voice_grant = VoiceGrant(
+            outgoing_application_sid=outgoing_application_sid,
+            incoming_allow=True,
+        )
+        access_token.add_grant(voice_grant)
 
-    response = jsonify(
-        {'token': access_token.to_jwt(), 'identity': identity})
+        response = jsonify(
+            {'token': access_token.to_jwt(), 'identity': identity})
 
-    return response
+        return response
+    except Exception as e:
+        print(f"Error generating token: {e}")
+        return jsonify({'error': 'Failed to generate token'}), 500
 
 to_number = None
 
