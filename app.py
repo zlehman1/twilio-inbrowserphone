@@ -15,8 +15,8 @@ import pprint as p
 load_dotenv()
 
 account_sid = os.getenv('TWILIO_ACCOUNT_SID')
-api_key = os.getenv('TWILIO_AUTH_TOKEN')
-api_key_secret = os.getenv('TWILIO_AUTH_TOKEN')
+api_key = os.getenv('TWILIO_API_KEY')
+api_key_secret = os.getenv('TWILIO_API_SECRET')
 twiml_app_sid = os.getenv('TWILIO_APP_SID')
 twilio_number = os.getenv('TWILIO_NUMBER')
 
