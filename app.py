@@ -75,7 +75,8 @@ def get_token():
         access_token.add_grant(voice_grant)
 
         response = jsonify(
-            {'token': access_token.to_jwt(), 'identity': identity})
+            {'token': access_token.to_jwt().decode('utf-8'), 'identity': identity}
+        )
 
         return response
     except Exception as e:
