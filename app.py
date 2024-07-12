@@ -161,5 +161,9 @@ def retrieve_url_data():
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
+    try:
+        port = int(os.getenv("PORT"))
+    except (TypeError, ValueError):
+        port = 5000
+        print("PORT environment variable not set or invalid. Defaulting to port 5000.")
     app.run(host='0.0.0.0', port=port, debug=False)
