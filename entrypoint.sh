@@ -18,4 +18,4 @@ if ! [ "$PORT" -eq "$PORT" ] 2>/dev/null; then
 fi
 
 # Start Gunicorn
-exec gunicorn --bind 0.0.0.0:$PORT app:app
+gunicorn --bind 0.0.0.0:$PORT app:app
