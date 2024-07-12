@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Export the PORT environment variable
-export PORT
-
 # Log the PORT value for debugging
 echo "Starting Gunicorn on port: $PORT"
 
