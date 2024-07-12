@@ -74,9 +74,16 @@ def get_token():
         )
         access_token.add_grant(voice_grant)
 
+        token = access_token.to_jwt()
+        print(f"Token type before decoding: {type(token)}")
+        token = token.decode('utf-8')
+        print(f"Token type after decoding: {type(token)}")
+
         response = jsonify(
-            {'token': access_token.to_jwt().decode('utf-8'), 'identity': identity}
+            {'token': token, 'identity': identity}
         )
+
+        print(f"Response: {response.get_json()}")
 
         return response
     except Exception as e:
