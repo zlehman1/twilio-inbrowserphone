@@ -74,9 +74,14 @@ This repository includes a GitHub Actions workflow for deploying the application
    - `DEEPGRAM_API_KEY`: Your Deepgram API Key
    - `OPENAI_API_KEY`: Your OpenAI API Key
 
-2. Push your changes to the `prepare-deployment` branch to trigger the deployment workflow.
+2. Push your changes to the `fix-port-error-handling` branch to trigger the deployment workflow.
 
 The GitHub Actions workflow will build the Docker image, push it to the Heroku container registry, and release the application on Heroku.
+
+### Notes
+
+- The Dockerfile sets a default `PORT` environment variable to `5000`. Heroku will override this value with its own port number when the container is run.
+- Ensure that the `TWILIO_APP_SID` is correctly set in the `.env` file with the actual Twilio Application SID provided by Twilio.
 
 ## License
 
