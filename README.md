@@ -74,7 +74,7 @@ This repository includes a GitHub Actions workflow for deploying the application
    - `DEEPGRAM_API_KEY`: Your Deepgram API Key
    - `OPENAI_API_KEY`: Your OpenAI API Key
 
-2. Push your changes to the `main` or `master` branch to trigger the deployment workflow.
+2. Push your changes to the `prepare-deployment` branch to trigger the deployment workflow.
 
 The GitHub Actions workflow will build the Docker image, push it to the Heroku container registry, and release the application on Heroku.
 
