@@ -133,3 +133,6 @@ dmypy.json
 docker-compose.yml
 Dockerfile
 .dockerignore
+
+# Exclude sensitive information
+.env
