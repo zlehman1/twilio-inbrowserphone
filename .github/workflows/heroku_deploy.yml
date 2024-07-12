@@ -26,24 +26,24 @@ jobs:
 
     - name: Build, tag, and push Docker image to Heroku
       run: |
-        docker build -t registry.heroku.com/floating-badlands-33224/web .
-        docker push registry.heroku.com/floating-badlands-33224/web
+        docker build -t registry.heroku.com/outbound-phone-gpt/web .
+        docker push registry.heroku.com/outbound-phone-gpt/web
 
     - name: Release Docker image on Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku container:release web --app floating-badlands-33224
+        heroku container:release web --app outbound-phone-gpt
 
     - name: Set Heroku environment variables
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku config:set TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }} --app floating-badlands-33224
-        heroku config:set TWILIO_API_KEY=${{ secrets.TWILIO_API_KEY }} --app floating-badlands-33224
-        heroku config:set TWILIO_API_SECRET=${{ secrets.TWILIO_API_SECRET }} --app floating-badlands-33224
-        heroku config:set TWILIO_APP_SID=${{ secrets.TWILIO_APP_SID }} --app floating-badlands-33224
-        heroku config:set TWILIO_NUMBER=${{ secrets.TWILIO_NUMBER }} --app floating-badlands-33224
-        heroku config:set TWILIO_AUTH_TOKEN=${{ secrets.TWILIO_AUTH_TOKEN }} --app floating-badlands-33224
-        heroku config:set DEEPGRAM_API_KEY=${{ secrets.DEEPGRAM_API_KEY }} --app floating-badlands-33224
-        heroku config:set OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --app floating-badlands-33224
+        heroku config:set TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }} --app outbound-phone-gpt
+        heroku config:set TWILIO_API_KEY=${{ secrets.TWILIO_API_KEY }} --app outbound-phone-gpt
+        heroku config:set TWILIO_API_SECRET=${{ secrets.TWILIO_API_SECRET }} --app outbound-phone-gpt
+        heroku config:set TWILIO_APP_SID=${{ secrets.TWILIO_APP_SID }} --app outbound-phone-gpt
+        heroku config:set TWILIO_NUMBER=${{ secrets.TWILIO_NUMBER }} --app outbound-phone-gpt
+        heroku config:set TWILIO_AUTH_TOKEN=${{ secrets.TWILIO_AUTH_TOKEN }} --app outbound-phone-gpt
+        heroku config:set DEEPGRAM_API_KEY=${{ secrets.DEEPGRAM_API_KEY }} --app outbound-phone-gpt
+        heroku config:set OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --app outbound-phone-gpt
