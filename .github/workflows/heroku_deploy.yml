@@ -1,0 +1,50 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Install Heroku CLI
+      run: curl https://cli-assets.heroku.com/install.sh | sh
+
+    - name: Log in to Heroku Container Registry
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+
+    - name: Build, tag, and push Docker image to Heroku
+      run: |
+        docker build -t registry.heroku.com/floating-badlands-33224/web .
+        docker push registry.heroku.com/floating-badlands-33224/web
+
+    - name: Release Docker image on Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku container:release web --app floating-badlands-33224
+
+    - name: Set Heroku environment variables
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku config:set TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }} --app floating-badlands-33224
+        heroku config:set TWILIO_API_KEY=${{ secrets.TWILIO_API_KEY }} --app floating-badlands-33224
+        heroku config:set TWILIO_API_SECRET=${{ secrets.TWILIO_API_SECRET }} --app floating-badlands-33224
+        heroku config:set TWILIO_APP_SID=${{ secrets.TWILIO_APP_SID }} --app floating-badlands-33224
+        heroku config:set TWILIO_NUMBER=${{ secrets.TWILIO_NUMBER }} --app floating-badlands-33224
+        heroku config:set TWILIO_AUTH_TOKEN=${{ secrets.TWILIO_AUTH_TOKEN }} --app floating-badlands-33224
+        heroku config:set DEEPGRAM_API_KEY=${{ secrets.DEEPGRAM_API_KEY }} --app floating-badlands-33224
+        heroku config:set OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --app floating-badlands-33224
