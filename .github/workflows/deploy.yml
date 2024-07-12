@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - new-deployment-branch
 
 jobs:
   build:
