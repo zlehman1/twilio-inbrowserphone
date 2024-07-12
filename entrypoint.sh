@@ -11,5 +11,11 @@ export PORT
 # Log the PORT value for debugging
 echo "Starting Gunicorn on port: $PORT"
 
+# Validate that PORT is a valid integer
+if ! [ "$PORT" -eq "$PORT" ] 2>/dev/null; then
+  echo "Error: PORT is not a valid integer."
+  exit 1
+fi
+
 # Start Gunicorn
 exec gunicorn --bind 0.0.0.0:$PORT app:app
