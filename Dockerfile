@@ -13,5 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Set a default value for the PORT environment variable
 ENV PORT 5000
 
-# Run the application using Gunicorn
-CMD sh -c "gunicorn --bind 0.0.0.0:$PORT app:app"
+# Add the entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+
+# Make the entrypoint script executable
+RUN chmod +x /entrypoint.sh
+
+# Use the entrypoint script to start the application
+ENTRYPOINT ["/entrypoint.sh"]
