@@ -27,11 +27,11 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        docker build -t registry.heroku.com/floating-badlands-33224/web .
-        docker push registry.heroku.com/floating-badlands-33224/web
+        docker build -t registry.heroku.com/outbound-phone-gpt/web .
+        docker push registry.heroku.com/outbound-phone-gpt/web
 
     - name: Release Docker image on Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku container:release web --app floating-badlands-33224
+        heroku container:release web --app outbound-phone-gpt
