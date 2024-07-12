@@ -80,7 +80,9 @@ def get_token():
         return response
     except Exception as e:
         print(f"Error generating token: {e}")
-        return jsonify({'error': 'Failed to generate token'}), 500
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': 'Failed to generate token', 'details': str(e)}), 500
 
 to_number = None
 
