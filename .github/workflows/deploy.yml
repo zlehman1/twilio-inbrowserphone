@@ -19,20 +19,21 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Log in to Heroku Container Registry
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: |
-        echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+      uses: docker/login-action@v1
+      with:
+        registry: registry.heroku.com
+        username: _
+        password: ${{ secrets.HEROKU_API_KEY }}
 
     - name: Build and push Docker image to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        docker build -t registry.heroku.com/outbound-phone-gpt/web .
-        docker push registry.heroku.com/outbound-phone-gpt/web
+        docker build -t registry.heroku.com/quiet-meadow-75538/web .
+        docker push registry.heroku.com/quiet-meadow-75538/web
 
     - name: Release Docker image on Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku container:release web --app outbound-phone-gpt
+        heroku container:release web --app quiet-meadow-75538
