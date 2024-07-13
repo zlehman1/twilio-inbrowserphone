@@ -160,6 +160,11 @@ def retrieve_url_data():
     return render_template('urldata.html', urllists=urllists)
 
 
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return app.send_static_file(filename)
+
+
 if __name__ == "__main__":
     try:
         port = int(os.getenv("PORT"))
