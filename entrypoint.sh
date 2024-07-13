@@ -16,4 +16,4 @@ export PORT
 echo "Validated PORT: $PORT"
 
 # Start Gunicorn
-gunicorn --bind 0.0.0.0:$PORT app:app
+gunicorn --bind 0.0.0.0:${PORT} app:app
