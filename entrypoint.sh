@@ -12,5 +12,8 @@ fi
 # Export the PORT variable to ensure it's correctly interpreted
 export PORT
 
+# Debug statement to print the port number after validation
+echo "Validated PORT: $PORT"
+
 # Start Gunicorn
 gunicorn --bind 0.0.0.0:$PORT app:app
